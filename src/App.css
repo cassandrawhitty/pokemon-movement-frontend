@@ -3,23 +3,27 @@
 }
 
 body {
-  background-color: #fee440; 
+  background-color: #ffcb05; 
 }
 
 .cards-container {
   display: flex; 
   flex-wrap: wrap;
   justify-content: center; 
-  padding: 150px; 
+  padding: 40px; 
 }
 
 .card {
   margin: 10px;
   padding: 20px;
-  background-color: #00bbf9;
+  background-color: #2a75bb;
   border: solid black;
 }
 
 .hidden{
   display: none; 
+}
+
+.pika {
+  height: 60px;
 }

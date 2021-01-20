@@ -4,7 +4,8 @@ export default function Card({ moveType }) {
 
     return (
         <div className="card">
-            <h1>{moveType.name}</h1>
+            <h1>Move: {moveType.name.toUpperCase()}</h1>
+            <h2>Type: {moveType.move_type.toUpperCase()}</h2>
         </div>
     );
 }
