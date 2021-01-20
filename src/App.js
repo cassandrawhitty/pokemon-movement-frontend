@@ -1,25 +1,50 @@
-import logo from './logo.svg';
 import './App.css';
+import { Component } from 'react';
+import SearchTypeForm from './components/SearchTypeForm';
+import CardsContainer from './components/CardsContainer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    allMoveTypes: [],
+    selectedTypes: []
+  }
+
+  componentDidMount(){
+    fetch("http://localhost:3000/types")
+      .then(response => response.json())
+      .then(types => {
+        this.setState({ allMoveTypes: types })
+      })
+  }
+
+  filterTypes = ( event ) => {
+    const input = event.target.value
+    const filteredTypes = this.state.allMoveTypes
+      .filter(
+        type => (
+          type.name
+          .includes(input)
+        )
+      )
+      this.setState( { selectedTypes: filteredTypes } )
+  }
+
+  render(){
+    // const { selectedTypes } = this.state
+    return (
+      <div className="App">
+        <h1>Pokemon Move Types</h1>
+        <SearchTypeForm filterTypes={ this.filterTypes } />
+        <CardsContainer moveTypes={this.state.selectedTypes} />
+      </div>
+    );
+  }
 }
 
 export default App;
+
+// create a component for the move card
+// import component to app
+// fetch from the backend 
+// for each object in the array, add the name to the card component 
