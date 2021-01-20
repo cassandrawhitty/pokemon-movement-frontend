@@ -6,24 +6,24 @@ import CardsContainer from './components/CardsContainer';
 class App extends Component {
 
   state = {
-    allMoveTypes: [],
+    allMoves: [],
     selectedTypes: []
   }
 
   componentDidMount(){
-    fetch("http://localhost:3000/types")
+    fetch("http://localhost:3000/moves")
       .then(response => response.json())
-      .then(types => {
-        this.setState({ allMoveTypes: types })
+      .then(moves => {
+        this.setState({ allMoves: moves })
       })
   }
 
   filterTypes = ( event ) => {
     const input = event.target.value
-    const filteredTypes = this.state.allMoveTypes
+    const filteredTypes = this.state.allMoves
       .filter(
-        type => (
-          type.name
+        move => (
+          move.move_type
           .includes(input)
         )
       )
@@ -34,8 +34,9 @@ class App extends Component {
     // const { selectedTypes } = this.state
     return (
       <div className="App">
-        <h1>Pokemon Move Types</h1>
+        <h1><img src="https://i.imgur.com/ZurbDHR.gif" className="pika" alt="dancing pikachu"/>Pokemon Move Types<img src="https://i.imgur.com/ZurbDHR.gif" className="pika" alt="dancing pikachu"/></h1>
         <SearchTypeForm filterTypes={ this.filterTypes } />
+        <h3>Types to Search: normal, fighting, flying, poison, ground, rock, bug, ghost, steel, fire, water, grass, electric, psychic, ice, dragon, dark, fairy, unknown, shadow</h3>
         <CardsContainer moveTypes={this.state.selectedTypes} />
       </div>
     );
